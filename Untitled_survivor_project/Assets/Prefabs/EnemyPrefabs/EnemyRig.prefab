@@ -207,8 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CharacterController>k__BackingField: {fileID: 0}
   <Agent>k__BackingField: {fileID: 7520269851627071410}
-  <Rigidbody>k__BackingField: {fileID: 0}
-  <BodyBoxCollider>k__BackingField: {fileID: 0}
+  <Rigidbody>k__BackingField: {fileID: 7951148926365481695}
+  <BodyBoxCollider>k__BackingField: {fileID: 771690765308697516}
   <PunchWarningBox>k__BackingField: {fileID: 0}
   <Animator>k__BackingField: {fileID: 7844823932693488436}
   <SoundHandler>k__BackingField: {fileID: 9216887635318838435}
