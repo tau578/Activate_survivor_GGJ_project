@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 4510827402340345886}
   - component: {fileID: 9216887635318838435}
   - component: {fileID: 7951148926365481695}
+  - component: {fileID: 771690765308697516}
   - component: {fileID: 7520269851627071410}
   m_Layer: 0
   m_Name: EnemyBody
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad27395afc4751429ca7a51cc7281a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 12
+  maxHealth: 5
   isInvulnerable: 0
   isDead: 0
   health: 0
@@ -276,11 +277,32 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &771690765308697516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480209548744634548}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6396086, y: 2.1568303, z: 0.72479486}
+  m_Center: {x: 0.018431664, y: 1.0572481, z: -0.13760257}
 --- !u!195 &7520269851627071410
 NavMeshAgent:
   m_ObjectHideFlags: 0

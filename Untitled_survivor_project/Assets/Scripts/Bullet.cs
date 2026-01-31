@@ -11,21 +11,36 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         rb.isKinematic = false;
-    }
 
+    }
+    private void Start()
+    {
+        Destroy(gameObject, 4f); // Destroy bullet after 5 seconds to avoid clutter
+    }
     public void MoveButllet(Vector3 direction, float speed)
     {
         rb.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
     }
     private void OnTriggerEnter(Collider other)
     {
-        /*
-        IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable != null)
+        Debug.Log("OnTrigger Enter got callled");
+        Health healthComponent = other.GetComponent<Health>();
+        if (healthComponent != null)
         {
-            damageable.TakeDamage(damage);
+            Debug.Log("trying to deal damage to " + other.name);
+            healthComponent.DealDamage(damage);
         }
         Destroy(gameObject);
-        */
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("OnCollision Enter got callled");
+        Health healthComponent = collision.gameObject.GetComponent<Health>();
+        if (healthComponent != null)
+        {
+            Debug.Log("trying to deal damage to " + collision.gameObject.name);
+            healthComponent.DealDamage(damage);
+        }
+        Destroy(gameObject);
     }
 }
