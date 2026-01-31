@@ -259,6 +259,9 @@ MonoBehaviour:
   oxygenDepletionRateRunning: 10
   takeDamageInterval: 2
   damagePerInterval: 3
+  audioSource: {fileID: 1910183574812924067}
+  clipMedkit: {fileID: 8300000, guid: f59fd1bfa849f8e45a85ed4317ad406f, type: 3}
+  oxygenPickupClip: {fileID: 8300000, guid: 7834fcd5e9f9eff44855ddda59b9901b, type: 3}
 --- !u!114 &3540985511496040639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +277,8 @@ MonoBehaviour:
   maxHealth: 12
   isInvulnerable: 0
   isDead: 0
+  audioSource: {fileID: 0}
+  clips: []
   health: 0
 --- !u!136 &6443352613053046429
 CapsuleCollider:

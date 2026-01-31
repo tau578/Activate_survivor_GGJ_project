@@ -15,6 +15,12 @@ public class OxygonSystem : MonoBehaviour
     [SerializeField] private float damagePerInterval = 3;
     private float damageTimer;
     private float currentOxygen;
+
+    //SFX
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clipMedkit;
+    [SerializeField] private AudioClip oxygenPickupClip;
+
     private void Awake()
     {
         if (playerController == null)
@@ -67,10 +73,22 @@ public class OxygonSystem : MonoBehaviour
     public void RefillOxygen()
     {
         currentOxygen = maxOxygen;
+
+        //SFX
+        if (audioSource != null && oxygenPickupClip != null)
+        {
+            audioSource.PlayOneShot(oxygenPickupClip);
+        }
     }
     public void RefillHealth()
     {
         playerHealth.RefilHealth();
+
+        //SFX
+        if (audioSource != null && clipMedkit != null)
+        {
+            audioSource.PlayOneShot(clipMedkit);
+        }
     }
 
 }
