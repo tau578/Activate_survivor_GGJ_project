@@ -17,6 +17,10 @@ public class Health : MonoBehaviour
 
     public bool isDead;
 
+    //SFX
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] clips;
+
     //public bool IsDead => health == 0; this is one way to creaete a bool meathod with only one line
     public float health;
     void Start()
@@ -38,6 +42,17 @@ public class Health : MonoBehaviour
         {
             isDead = true;
             OnDie?.Invoke();
+
+            //SFX
+            if (audioSource == null || clips == null || clips.Length == 0)
+                return;
+
+            int index = UnityEngine.Random.Range(0, clips.Length);
+            AudioClip clip = clips[index];
+
+            if (clip != null)
+                audioSource.PlayOneShot(clip);
+
 
         }
 
