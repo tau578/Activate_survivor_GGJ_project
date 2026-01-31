@@ -8,7 +8,7 @@ public class EnemyDeadState : EnemyBaseState
     private float blinkTimer;
     private float disappearTimer;
     private float waitTimer;
-    private float timeToWait = 3f;
+    private float timeToWait = 1.2f;
     private float timeToDisapear = 4f;
     private float timeBetweenEachBlink = 0.5f;
     private SpriteRenderer sprite;

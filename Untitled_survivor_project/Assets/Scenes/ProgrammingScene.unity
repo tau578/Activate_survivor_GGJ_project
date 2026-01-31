@@ -1181,6 +1181,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.492
       objectReference: {fileID: 0}
+    - target: {fileID: 4752032824450359114, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5788321842498396713, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
       propertyPath: m_Name
       value: PlayerRig
@@ -1227,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7866432518517527351, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -43,6 +43,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
+        /*
         if (playerCamera == null || firePoint == null || bulletPrefab == null) return;
 
         // Ray from center of screen
@@ -58,6 +59,7 @@ public class PlayerShoot : MonoBehaviour
 
         // Direction from gun to target
         Vector3 direction = (targetPoint - firePoint.position).normalized;
+        
 
         // ---- SAFE SPAWN (the fix) ----
         // push the bullet a bit forward from muzzle so it doesn't overlap colliders
@@ -77,8 +79,10 @@ public class PlayerShoot : MonoBehaviour
                 spawnPos = hit.point - direction * backOffFromHit;
             }
         }
-
-        GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(direction));
+        */
+      //  GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(direction));
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Vector3 direction = firePoint.forward;
 
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
