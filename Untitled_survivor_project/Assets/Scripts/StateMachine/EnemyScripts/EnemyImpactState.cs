@@ -16,6 +16,7 @@ public class EnemyImpactState : EnemyBaseState
         timer += deltaTime;
         if(timer >= stateMachine.HitImpactDuration)
         {
+            /*
             if(ShouldGuard() && !stateMachine.wasGaurdRecentlyBroken)
             {
                 stateMachine.SwitchState(new EnemyBlockingState(stateMachine));
@@ -23,7 +24,8 @@ public class EnemyImpactState : EnemyBaseState
             else
             {
                 stateMachine.SwitchState(new EnemyIdleState(stateMachine));
-            }
+            } */
+            stateMachine.SwitchState(new EnemyIdleState(stateMachine));
         }
     }
     public override void Exit()
