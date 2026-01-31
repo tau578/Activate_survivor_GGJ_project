@@ -5,7 +5,7 @@ public class EnemyAttackingState : EnemyBaseState
     public EnemyAttackingState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
     }
-    private readonly int punchHash = Animator.StringToHash("Punch");
+    private readonly int punchHash = Animator.StringToHash("Attack");
     private float timer;
     private bool hasAlreadyDealtDamge; 
     public override void Enter()
