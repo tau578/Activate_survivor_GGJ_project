@@ -216,7 +216,7 @@ MonoBehaviour:
   <HitImpactDuration>k__BackingField: 0
   <GettingkickedPushBackForce>k__BackingField: 0
   <GuardDurationRange>k__BackingField: {x: 0, y: 0}
-  <ChaseSpeed>k__BackingField: 10
+  <ChaseSpeed>k__BackingField: 2
   <PlayerChaseRange>k__BackingField: 6.38
   <AttackRange>k__BackingField: 1.62
   <AttackDuration>k__BackingField: 2
