@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 1940455174069542727}
   - component: {fileID: 8362880788022095685}
   - component: {fileID: 933315386831004920}
+  - component: {fileID: 3540985511496040639}
   - component: {fileID: 6443352613053046429}
   - component: {fileID: 3192771081594230378}
   m_Layer: 0
@@ -252,6 +253,22 @@ MonoBehaviour:
   oxygenDepletionRate: 1
   oxygenDepletionRateWalking: 5
   oxygenDepletionRateRunning: 10
+--- !u!114 &3540985511496040639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5963647202022834387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad27395afc4751429ca7a51cc7281a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 12
+  isInvulnerable: 0
+  isDead: 0
+  health: 0
 --- !u!136 &6443352613053046429
 CapsuleCollider:
   m_ObjectHideFlags: 0

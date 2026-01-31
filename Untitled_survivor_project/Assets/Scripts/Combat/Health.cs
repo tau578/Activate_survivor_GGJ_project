@@ -6,7 +6,7 @@ using UnityEngine;
 // attached to any game object that has health, e.g., player, enemies
 public class Health : MonoBehaviour
 {
-    [SerializeField] public int maxHealth = 12;
+    [SerializeField] public float maxHealth = 12f;
 
 
     public event Action<bool> OnHealthChanged; // if true, health increased, if false, health decreased
@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     public bool isDead;
 
     //public bool IsDead => health == 0; this is one way to creaete a bool meathod with only one line
-    public int health;
+    public float health;
     void Start()
     {
         health = maxHealth;
@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
     {
         this.isInvulnerable = isInvulnerable;
     }
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
 
         if (isDead || isInvulnerable) { return; } // don't take damage when you are invulnerable

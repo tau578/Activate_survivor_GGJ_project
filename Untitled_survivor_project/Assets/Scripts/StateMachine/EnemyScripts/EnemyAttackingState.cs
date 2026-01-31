@@ -39,7 +39,7 @@ public class EnemyAttackingState : EnemyBaseState
     public override void Exit()
     {
      //   stateMachine.PunchHitBox.gameObject.SetActive(false);
-        stateMachine.PunchWarningBox.gameObject.SetActive(false);
+//        stateMachine.PunchWarningBox.gameObject.SetActive(false);
     }
 
     
