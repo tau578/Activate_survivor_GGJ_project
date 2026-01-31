@@ -227,7 +227,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 7663608815057417146}
   walkSpeed: 4.5
   runSpeed: 7.5
-  mouseSensitivity: 130
+  mouseSensitivity: 250
   skin: 0.08
   collisionMask:
     serializedVersion: 2
@@ -530,7 +530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &818528166778492566
 Transform:
   m_ObjectHideFlags: 0
@@ -648,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 8458279532452038700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.41, z: 0.317}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0.317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
