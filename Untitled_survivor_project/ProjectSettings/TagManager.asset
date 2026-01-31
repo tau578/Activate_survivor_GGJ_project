@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bulletsphere
   - Water
   - UI
-  - 
-  - 
+  - Bullet
+  - UI3D
   - 
   - 
   - 

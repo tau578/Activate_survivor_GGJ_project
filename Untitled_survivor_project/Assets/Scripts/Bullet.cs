@@ -12,6 +12,10 @@ public class Bullet : MonoBehaviour
         rb.useGravity = false;
         rb.isKinematic = false;
 
+        //this fixes the direction
+        rb.freezeRotation = true;
+
+
     }
     private void Start()
     {
@@ -19,7 +23,9 @@ public class Bullet : MonoBehaviour
     }
     public void MoveButllet(Vector3 direction, float speed)
     {
-        rb.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
+        //rb.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
+        //this fixes the direction
+        rb.linearVelocity = direction.normalized * speed;
     }
     private void OnTriggerEnter(Collider other)
     {
