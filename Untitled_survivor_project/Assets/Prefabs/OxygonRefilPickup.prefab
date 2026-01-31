@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4913778152166991652}
   - component: {fileID: 1898153209497798479}
   - component: {fileID: 5217183108960019018}
+  - component: {fileID: 2573626017826446127}
   m_Layer: 0
   m_Name: PickUpSprite
   m_TagString: OxygonPickUp
@@ -150,6 +151,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2573626017826446127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308950058100081290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7cd3a67e8d1d9d4fbe326ee06172faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4440454886389805585
 GameObject:
   m_ObjectHideFlags: 0
