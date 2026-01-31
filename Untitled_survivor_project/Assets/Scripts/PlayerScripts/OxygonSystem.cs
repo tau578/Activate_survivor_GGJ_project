@@ -40,5 +40,9 @@ public class OxygonSystem : MonoBehaviour
         }
         uiManager.UpdateOxygenBar(currentOxygen, maxOxygen);
     }
+    public void RefillOxygen()
+    {
+        currentOxygen = maxOxygen;
+    }
 
 }
