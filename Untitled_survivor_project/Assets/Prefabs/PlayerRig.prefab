@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 3885824196059407026}
   - component: {fileID: 1940455174069542727}
   - component: {fileID: 8362880788022095685}
+  - component: {fileID: 933315386831004920}
   - component: {fileID: 6443352613053046429}
   - component: {fileID: 3192771081594230378}
   m_Layer: 0
@@ -223,13 +224,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 7663608815057417146}
-  moveSpeed: 4.5
+  walkSpeed: 4.5
+  runSpeed: 7.5
   mouseSensitivity: 130
   skin: 0.08
   collisionMask:
     serializedVersion: 2
     m_Bits: 4294967295
   capsuleRadiusMinus: 0.02
+  isRunning: 0
+  isWalking: 0
+--- !u!114 &933315386831004920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5963647202022834387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a8832a9aec14644b6fafe48a17cba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 8362880788022095685}
+  uiManager: {fileID: 0}
+  maxOxygen: 100
+  oxygenDepletionRate: 1
+  oxygenDepletionRateWalking: 5
+  oxygenDepletionRateRunning: 10
 --- !u!136 &6443352613053046429
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -8,15 +9,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Movement")]
-    public float moveSpeed = 4.5f;
+    public float walkSpeed = 4.5f;
+    public float runSpeed = 7.5f;
     public float mouseSensitivity = 130f;
 
     [Header("Collision")]
     public float skin = 0.08f;                // small offset to avoid sticking
     public LayerMask collisionMask = ~0;      // which layers block movement
     public float capsuleRadiusMinus = 0.02f;  // shrink radius for casts a bit
-
+    [HideInInspector] public bool isRunning = false;
+    [HideInInspector] public bool isWalking = false;
     private Rigidbody rb;
+    private float moveSpeed;
     private CapsuleCollider capsule;
 
     // cached input per frame
@@ -41,6 +45,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        moveSpeed = walkSpeed;
+
         // Force the camera to look straight ahead (no pitch)
         if (cameraTransform != null)
             cameraTransform.localRotation = Quaternion.identity;
@@ -51,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        HandleRuning();
         // --- Read movement input in Update ---
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -116,5 +123,20 @@ public class PlayerController : MonoBehaviour
         }
 
         return desired;
+    }
+    private void HandleRuning()
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = runSpeed;
+            isWalking = false;
+            isRunning = true;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+            isWalking = true;
+            isRunning = false;
+        }
     }
 }
