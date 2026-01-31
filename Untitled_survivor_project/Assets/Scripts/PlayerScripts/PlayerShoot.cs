@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [Header("Animator")]
+    [Header("Animator")] 
     [SerializeField] private Animator playerAnimator;
     [Header("Gun")]
+    [SerializeField] private bool isGunUnlocked = false;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed = 20f;
@@ -36,9 +37,14 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         isShooting = shootTimer < timeBetweenShots;
+        playerAnimator.gameObject.SetActive(false);
     }
     private void Update()
     {
+        if(isGunUnlocked == false)
+        {
+            return;
+        }
         shootTimer += Time.deltaTime;
         HadndleHandAnimation();
 
@@ -50,6 +56,12 @@ public class PlayerShoot : MonoBehaviour
             currentAmmo--; // spend 1 bullet
             Shoot();
         }
+    }
+    public void UnlockGun()
+    {
+        Debug.Log("unlock gun got called ");
+        isGunUnlocked = true;   
+        playerAnimator.gameObject.SetActive(true);
     }
 
     private void Shoot()

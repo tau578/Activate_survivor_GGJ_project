@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 7663608815057417146}
   walkSpeed: 4.5
-  runSpeed: 7.5
+  runSpeed: 11
   mouseSensitivity: 250
   skin: 0.08
   collisionMask:
