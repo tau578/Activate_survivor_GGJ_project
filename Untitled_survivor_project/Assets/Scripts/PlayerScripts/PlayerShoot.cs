@@ -1,7 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+    [Header("Animator")]
+    [SerializeField] private Animator playerAnimator;
     [Header("Gun")]
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
@@ -22,20 +25,28 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] private float maxShootDistance = 1000f;
 
-    private float shotTimer = 0f;
+    private readonly int shootHash = Animator.StringToHash("HandShootAnimation");
+    private readonly int idleHash = Animator.StringToHash("HandIdleAnimation");
+    private float shootTimer = 0f;
+    private bool isShooting = false;
 
     public int CurrentAmmo => currentAmmo;
     public int MaxAmmo => maxAmmo;
 
+    private void Start()
+    {
+        isShooting = shootTimer < timeBetweenShots;
+    }
     private void Update()
     {
-        shotTimer += Time.deltaTime;
+        shootTimer += Time.deltaTime;
+        HadndleHandAnimation();
 
-        if (Input.GetKey(KeyCode.Mouse0) && shotTimer >= timeBetweenShots)
+        if (Input.GetKey(KeyCode.Mouse0) && shootTimer >= timeBetweenShots)
         {
             if (currentAmmo <= 0) return; // no ammo => can't shoot
 
-            shotTimer = 0f;
+            shootTimer = 0f;
             currentAmmo--; // spend 1 bullet
             Shoot();
         }
@@ -80,7 +91,7 @@ public class PlayerShoot : MonoBehaviour
             }
         }
         */
-      //  GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(direction));
+        //  GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(direction));
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Vector3 direction = firePoint.forward;
 
@@ -91,6 +102,31 @@ public class PlayerShoot : MonoBehaviour
         }
 
         PlayRandomShot();
+        playerAnimator.CrossFadeInFixedTime(shootHash, 0f);
+    }
+    private void HadndleHandAnimation()
+    {
+        playerAnimator.SetBool("IsShooting", shootTimer < timeBetweenShots);
+        bool shouldShoot = shootTimer < timeBetweenShots;
+
+        if (shouldShoot == isShooting)
+            return; // no state change → do nothing
+
+        isShooting = shouldShoot;
+
+        if (isShooting)
+            playerAnimator.CrossFadeInFixedTime(shootHash, 0.1f);
+        else
+            playerAnimator.CrossFadeInFixedTime(idleHash, 0.1f);
+        /*
+        if(shootTimer < timeBetweenShots)
+            
+        {
+            playerAnimator.CrossFadeInFixedTime(shootHash, 0f);
+            return;
+        }
+        playerAnimator.CrossFadeInFixedTime(idleHash, 0f);
+        */
     }
 
     public void AddAmmo(int amount)

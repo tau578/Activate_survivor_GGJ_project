@@ -370,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de160d50ca32e14a892b84a82ea4a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 2436257002244447914}
   firePoint: {fileID: 4752032824450359114}
   bulletPrefab: {fileID: 3061030121632331441, guid: 66623010828673f4a9a4d07335f3d3ea, type: 3}
   bulletSpeed: 100
@@ -766,7 +767,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 6496322627003826616}
     m_Modifications:
     - target: {fileID: 1295958538891171761, guid: 596ad3f86876fdf48b81b11af32810d0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -877,6 +878,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 596ad3f86876fdf48b81b11af32810d0, type: 3}
+--- !u!95 &2436257002244447914 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8189867827794141830, guid: 596ad3f86876fdf48b81b11af32810d0, type: 3}
+  m_PrefabInstance: {fileID: 5793621093231590444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6971991361369592873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3505610873416820741, guid: 596ad3f86876fdf48b81b11af32810d0, type: 3}

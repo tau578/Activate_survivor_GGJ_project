@@ -847,6 +847,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2554186207915681627, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554186207915681627, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727434755618466717, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727434755618466717, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5788321842498396713, guid: 59f1886b16920684ea722dc3d2d9c052, type: 3}
       propertyPath: m_Name
       value: PlayerRig
