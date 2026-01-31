@@ -1,52 +1,46 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float damage = 1f;
-    private Rigidbody rb;
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.isKinematic = false;
+    [SerializeField] private float lifeTime = 4f;
 
-        //this fixes the direction
-        rb.freezeRotation = true;
+    private Vector3 dir;
+    private float speed;
 
+    // Small radius to make hit detection reliable
+    [SerializeField] private float hitRadius = 0.05f;
 
-    }
     private void Start()
     {
-        Destroy(gameObject, 4f); // Destroy bullet after 5 seconds to avoid clutter
+        Destroy(gameObject, lifeTime);
     }
-    public void MoveButllet(Vector3 direction, float speed)
+
+    public void MoveButllet(Vector3 direction, float bulletSpeed)
     {
-        //rb.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
-        //this fixes the direction
-        rb.linearVelocity = direction.normalized * speed;
+        dir = direction.normalized;
+        speed = bulletSpeed;
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void Update()
     {
-        Debug.Log("OnTrigger Enter got callled");
-        Health healthComponent = other.GetComponent<Health>();
-        if (healthComponent != null)
+        float distanceThisFrame = speed * Time.deltaTime;
+
+        // SphereCast to detect hit even at high speed (no tunneling)
+        if (Physics.SphereCast(transform.position, hitRadius, dir, out RaycastHit hit, distanceThisFrame))
         {
-            Debug.Log("trying to deal damage to " + other.name);
-            healthComponent.DealDamage(damage);
+            Health healthComponent = hit.collider.GetComponent<Health>();
+            if (healthComponent != null)
+            {
+                healthComponent.DealDamage(damage);
+            }
+
+            Destroy(gameObject);
+            return;
         }
-        Destroy(gameObject);
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("OnCollision Enter got callled");
-        Health healthComponent = collision.gameObject.GetComponent<Health>();
-        if (healthComponent != null)
-        {
-            Debug.Log("trying to deal damage to " + collision.gameObject.name);
-            healthComponent.DealDamage(damage);
-        }
-        Destroy(gameObject);
+
+        // Move straight
+        transform.position += dir * distanceThisFrame;
     }
 }
