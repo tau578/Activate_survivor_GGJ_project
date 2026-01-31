@@ -48,5 +48,10 @@ public class Health : MonoBehaviour
         health = Mathf.Min(health += healAmount, maxHealth);
         OnHealthChanged?.Invoke(true); // health increased
     }
+    public void RefilHealth()
+    {
+        health = maxHealth;
+        OnHealthChanged?.Invoke(true); 
+    }
 
 }

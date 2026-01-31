@@ -217,7 +217,7 @@ MonoBehaviour:
   <GuardDurationRange>k__BackingField: {x: 0, y: 0}
   <ChaseSpeed>k__BackingField: 10
   <PlayerChaseRange>k__BackingField: 6.38
-  <AttackRange>k__BackingField: 1
+  <AttackRange>k__BackingField: 1.62
   <AttackDuration>k__BackingField: 2
   <HasPotrolState>k__BackingField: 0
   <PatrolSpeed>k__BackingField: 5

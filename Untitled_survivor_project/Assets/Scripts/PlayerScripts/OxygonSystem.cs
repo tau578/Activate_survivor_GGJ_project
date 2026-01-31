@@ -64,9 +64,13 @@ public class OxygonSystem : MonoBehaviour
         uiManager.UpdateOxygenBar(currentOxygen, maxOxygen);
         uiManager.UpdateHealthBar(playerHealth.health, playerHealth.maxHealth);
     }
-        public void RefillOxygen()
+    public void RefillOxygen()
     {
         currentOxygen = maxOxygen;
+    }
+    public void RefillHealth()
+    {
+        playerHealth.RefilHealth();
     }
 
 }
