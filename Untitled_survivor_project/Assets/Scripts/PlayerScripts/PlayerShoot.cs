@@ -6,6 +6,12 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float fireRate = 0.5f; // bullets per second
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] gunShots;
+
+
     private float fireRaateTimer = 0f;
     private void Update()
     {
@@ -25,5 +31,20 @@ public class PlayerShoot : MonoBehaviour
             bulletScript.MoveButllet(firePoint.forward, bulletSpeed);
         }
        // Destroy(bullet, 2f); // Destroy the bullet after 2 seconds to avoid clutter
+
+       PlayRandomShot();
     }
+
+    private void PlayRandomShot()
+    {
+        if (gunShots == null || gunShots.Length == 0) return;
+
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(
+            gunShots[Random.Range(0, gunShots.Length)]
+        );
+    }
+
+
+
 }
