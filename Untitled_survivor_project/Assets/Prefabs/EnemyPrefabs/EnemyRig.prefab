@@ -213,7 +213,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 7844823932693488436}
   <SoundHandler>k__BackingField: {fileID: 9216887635318838435}
   <Health>k__BackingField: {fileID: 4510827402340345886}
-  <HitImpactDuration>k__BackingField: 0
+  <HitImpactDuration>k__BackingField: 0.2
   <GettingkickedPushBackForce>k__BackingField: 0
   <GuardDurationRange>k__BackingField: {x: 0, y: 0}
   <ChaseSpeed>k__BackingField: 2

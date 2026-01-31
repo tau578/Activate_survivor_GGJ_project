@@ -882,6 +882,10 @@ PrefabInstance:
       value: EnemyRig
       objectReference: {fileID: 0}
     - target: {fileID: 3270067824987636073, guid: e6d4491d9e4a5bd4ab200068411fcd6c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270067824987636073, guid: e6d4491d9e4a5bd4ab200068411fcd6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.06
       objectReference: {fileID: 0}
