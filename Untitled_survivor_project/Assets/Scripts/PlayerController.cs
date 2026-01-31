@@ -1,57 +1,120 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
-    // <-- благодаря [SerializeField] это видно в инспекторе
 
     [Header("Movement")]
     public float moveSpeed = 4.5f;
     public float mouseSensitivity = 130f;
 
-    [Header("Vertical Look")]
-    public float minY = -80f;
-    public float maxY = 75f;
+    [Header("Collision")]
+    public float skin = 0.08f;                // small offset to avoid sticking
+    public LayerMask collisionMask = ~0;      // which layers block movement
+    public float capsuleRadiusMinus = 0.02f;  // shrink radius for casts a bit
 
-    private float rotationX = 0f;
+    private Rigidbody rb;
+    private CapsuleCollider capsule;
+
+    // cached input per frame
+    private Vector2 inputMove; // x=Horizontal, y=Vertical
+    private float yaw;         // we keep only yaw (left-right), no pitch
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        capsule = GetComponent<CapsuleCollider>();
+
+        // Rigidbody setup for a character-like controller
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        rb.freezeRotation = true; // freeze all rotation to avoid jitter
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+    }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Force the camera to look straight ahead (no pitch)
+        if (cameraTransform != null)
+            cameraTransform.localRotation = Quaternion.identity;
+
+        // Optional: ensure CapsuleCollider uses a zero-friction PhysicMaterial
+        // Assign via Inspector.
     }
 
     void Update()
     {
-        HandleMovement();
-        HandleLook();
-    }
-
-    void HandleMovement()
-    {
+        // --- Read movement input in Update ---
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
+        inputMove = new Vector2(h, v).normalized;
 
-        Vector3 dir = transform.right * h + transform.forward * v;
-        dir = dir.normalized;
+        // --- Read mouse input, but only apply yaw (no pitch) ---
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        yaw += mouseX;
 
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        // Apply yaw to body; camera pitch stays zero (classic boomer shooter)
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        // Ensure camera has no local pitch/roll at any time
+        if (cameraTransform != null)
+            cameraTransform.localRotation = Quaternion.identity;
     }
 
-    void HandleLook()
+    void FixedUpdate()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        HandleMovementPhysics();
+    }
 
-        transform.Rotate(Vector3.up * mouseX);
+    void HandleMovementPhysics()
+    {
+        // Desired world-space direction using body forward/right
+        Vector3 fwd = transform.forward;
+        Vector3 right = transform.right;
+        Vector3 desired = (right * inputMove.x + fwd * inputMove.y).normalized;
 
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, minY, maxY);
-
-        if (cameraTransform != null)
+        // If no input, do not push into walls; keep gravity on Y
+        if (desired.sqrMagnitude < 0.0001f)
         {
-            cameraTransform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+            // kill horizontal velocity to avoid micro-jitter near walls
+            Vector3 vel = rb.linearVelocity;
+            rb.linearVelocity = new Vector3(0f, vel.y, 0f);
+            return;
         }
+
+        // Slide along obstacles instead of pushing into them
+        Vector3 projected = ProjectAlongObstacles(desired);
+
+        // Move using MovePosition for smooth physics cooperation
+        Vector3 targetPos = rb.position + projected * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(targetPos);
+    }
+
+    Vector3 ProjectAlongObstacles(Vector3 desired)
+    {
+        // CapsuleCast slightly ahead; if a wall is in front, project along its plane
+        float radius = Mathf.Max(0.01f, capsule.radius - capsuleRadiusMinus);
+        float halfHeight = Mathf.Max(radius, capsule.height * 0.5f - radius);
+
+        Vector3 worldCenter = rb.position + capsule.center;
+        Vector3 p1 = worldCenter + Vector3.up * (halfHeight - radius);
+        Vector3 p2 = worldCenter - Vector3.up * (halfHeight - radius);
+
+        float castDist = skin + 0.02f;
+        if (Physics.CapsuleCast(p1, p2, radius, desired, out RaycastHit hit, castDist, collisionMask, QueryTriggerInteraction.Ignore))
+        {
+            // Remove the component into the normal to create sliding movement
+            Vector3 slide = Vector3.ProjectOnPlane(desired, hit.normal).normalized;
+            return slide;
+        }
+
+        return desired;
     }
 }
